@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 mongoose.Promise = global.Promise;
 console.log('test')
 
-mongoose.connect('mongodb://localhost:27017/myapp').then((doc) => {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/myapp').then((doc) => {
     console.log('success to connent db')
 }, (err) =>{
     console.log('fail to connent db')
@@ -137,7 +137,7 @@ var DataSchema = new Schema({
         required: true,        
     },
     temp: {
-        type: Nunber,
+        type: Number,
         required: true
     },
     lat: {
@@ -178,6 +178,6 @@ app.post('/post3',(req,res) =>{
 })
 
 
-app.listen(3000,() => {
+app.listen(process.env.PORT || 3000,() => {
     console.log('on port 3000')
 })
